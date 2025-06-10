@@ -1,67 +1,114 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>수면 실태 조사</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <title>수면 실태 조사</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <h1>수면 실태 조사</h1>
-    <form id="surveyForm">
-        <label>1. 하루 평균 수면시간:</label><br>
-        <input type="radio" name="sleepDuration" value="2시간 미만"> 2시간 미만<br>
-        <input type="radio" name="sleepDuration" value="2~4시간"> 2시간 이상 4시간 미만<br>
-        <input type="radio" name="sleepDuration" value="4~6시간"> 4시간 이상 6시간 미만<br>
-        <input type="radio" name="sleepDuration" value="6~8시간"> 6시간 이상 8시간 미만<br>
-        <input type="radio" name="sleepDuration" value="8시간 이상"> 8시간 이상<br>
+  <h1>수면 실태 조사</h1>
 
-        <label>2. 수면 자세:</label><br>
-        <input type="radio" name="sleepPosture" value="등을 대고 눕는 자세"> 등을 대고 눕는 자세<br>
-        <input type="radio" name="sleepPosture" value="옆으로 눕는 자세"> 옆으로 눕는 자세<br>
-        <input type="radio" name="sleepPosture" value="엎드려 자는 자세"> 엎드려 자는 자세<br>
-        <input type="radio" name="sleepPosture" value="동그랗게 말린 자세"> 동그랗게 말린 자세<br>
+  <form id="surveyForm">
+    <div class="form-group">
+      <label>1. 하루 평균 수면시간:</label><br />
+      <input type="radio" name="sleepDuration" value="2시간 미만" id="sleep1" />
+      <label for="sleep1" class="option">2시간 미만</label>
 
-        <label>3. 베개 종류:</label><br>
-        <input type="radio" name="pillowType" value="자루형"> 자루형<br>
-        <input type="radio" name="pillowType" value="도넛형"> 도넛형<br>
-        <input type="radio" name="pillowType" value="웨이브형"> 웨이브형<br>
-        <input type="radio" name="pillowType" value="복합형"> 복합형<br>
-        <input type="radio" name="pillowType" value="안김형"> 안김형<br>
+      <input type="radio" name="sleepDuration" value="2~4시간" id="sleep2" />
+      <label for="sleep2" class="option">2시간 이상 4시간 미만</label>
 
-        <label>4. 수면 공간 분리 여부:</label><br>
-        <input type="radio" name="separateSpace" value="예"> 예<br>
-        <input type="radio" name="separateSpace" value="아니오"> 아니오<br>
+      <input type="radio" name="sleepDuration" value="4~6시간" id="sleep3" />
+      <label for="sleep3" class="option">4시간 이상 6시간 미만</label>
 
-        <label>5. 침구 상태:</label><br>
-        <input type="radio" name="beddingCondition" value="예"> 예<br>
-        <input type="radio" name="beddingCondition" value="보통"> 보통<br>
-        <input type="radio" name="beddingCondition" value="아니오"> 아니오<br>
+      <input type="radio" name="sleepDuration" value="6~8시간" id="sleep4" />
+      <label for="sleep4" class="option">6시간 이상 8시간 미만</label>
 
-        <label>6. 전자기기 사용시간:</label><br>
-        <input type="radio" name="deviceUsage" value="1시간 전"> 수면 1시간 이상 전<br>
-        <input type="radio" name="deviceUsage" value="30분 전"> 수면 30분 전<br>
-        <input type="radio" name="deviceUsage" value="직전"> 수면 직전<br>
+      <input type="radio" name="sleepDuration" value="8시간 이상" id="sleep5" />
+      <label for="sleep5" class="option">8시간 이상</label>
+    </div>
+
+    <div class="form-group">
+      <label>2. 수면 자세:</label><br />
+      <input type="radio" name="sleepPosture" value="등을 대고 눕는 자세" id="posture1" />
+      <label for="posture1" class="option">등을 대고 눕는 자세</label>
+
+      <input type="radio" name="sleepPosture" value="옆으로 눕는 자세" id="posture2" />
+      <label for="posture2" class="option">옆으로 눕는 자세</label>
+
+      <input type="radio" name="sleepPosture" value="엎드려 자는 자세" id="posture3" />
+      <label for="posture3" class="option">엎드려 자는 자세</label>
+
+      <input type="radio" name="sleepPosture" value="동그랗게 말린 자세" id="posture4" />
+      <label for="posture4" class="option">동그랗게 말린 자세</label>
+    </div>
+
+    <div class="form-group">
+      <label>3. 베개 종류:</label><br />
+      <input type="radio" name="pillowType" value="자루형" id="pillow1" />
+      <label for="pillow1" class="option">자루형</label>
+
+      <input type="radio" name="pillowType" value="도넛형" id="pillow2" />
+      <label for="pillow2" class="option">도넛형</label>
+
+      <input type="radio" name="pillowType" value="웨이브형" id="pillow3" />
+      <label for="pillow3" class="option">웨이브형</label>
+
+      <input type="radio" name="pillowType" value="복합형" id="pillow4" />
+      <label for="pillow4" class="option">복합형</label>
+
+      <input type="radio" name="pillowType" value="안김형" id="pillow5" />
+      <label for="pillow5" class="option">안김형</label>
+    </div>
+
+    <div class="form-group">
+      <label>4. 수면 공간 분리 여부:</label><br />
+      <input type="radio" name="separateSpace" value="예" id="space1" />
+      <label for="space1" class="option">예</label>
+
+      <input type="radio" name="separateSpace" value="아니오" id="space2" />
+      <label for="space2" class="option">아니오</label>
+    </div>
+
+    <div class="form-group">
+      <label>5. 침구 상태:</label><br />
+      <input type="radio" name="beddingCondition" value="예" id="bed1" />
+      <label for="bed1" class="option">예</label>
+
+      <input type="radio" name="beddingCondition" value="보통" id="bed2" />
+      <label for="bed2" class="option">보통</label>
+
+      <input type="radio" name="beddingCondition" value="아니오" id="bed3" />
+      <label for="bed3" class="option">아니오</label>
+    </div>
+
+    <div class="form-group">
+      <label>6. 전자기기 사용시간:</label><br />
+      <input type="radio" name="deviceUsage" value="1시간 전" id="device1" />
+      <label for="device1" class="option">수면 1시간 이상 전</label>
+
+      <input type="radio" name="deviceUsage" value="30분 전" id="device2" />
+      <label for="device2" class="option">수면 30분 전</label>
+
+      <input type="radio" name="deviceUsage" value="직전" id="device3" />
+      <label for="device3" class="option">수면 직전</label>
+    </div>
 
     <button type="submit">제출</button>
   </form>
 
- <script>
-  document.getElementById('surveyForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // 기본 제출 막기
+  <script>
+    document.getElementById('surveyForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // 제출 막기
 
-    const formData = new FormData(e.target);
-    const result = {};
-    formData.forEach((value, key) => {
-      result[key] = value;
+      const formData = new FormData(e.target);
+      const result = {};
+      formData.forEach((value, key) => {
+        result[key] = value;
+      });
+
+      localStorage.setItem('surveyResult', JSON.stringify(result));
+      window.location.href = 'result.html'; // 결과 페이지로 이동 (경로 맞게 수정)
     });
-
-    // 결과 저장
-    localStorage.setItem('surveyResult', JSON.stringify(result));
-
-    // 👇 절대 경로로 이동
-    window.location.href = 'https://yein2312.github.io/sleeping/result.html';
-  });
-</script>
-
+  </script>
 </body>
 </html>
