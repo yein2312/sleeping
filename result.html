@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>수면 유형 결과</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>수면 유형 결과</h1>
+  <div id="resultContainer"></div>
+
+  <button onclick="window.print()">프린트하기</button>
+
+  <script>
+    // 로컬스토리지에서 데이터 가져오기
+    const data = JSON.parse(localStorage.getItem('surveyResult'));
+    const container = document.getElementById('resultContainer');
+
+    function getSleepType(data) {
+      // 간단한 수면 유형 분류 예시
+      if (!data) return "설문 데이터가 없습니다.";
+
+      const hour = data.sleepDuration;
+      const device = data.deviceUsage;
+      let type = "";
+
+      if (hour.includes("6시간 이상") && device.includes("1시간")) {
+        type = "건강한 수면형";
+      } else if (hour.includes("4시간") || device.includes("직전")) {
+        type = "수면 부족형";
+      } else {
+        type = "보통 수면형";
+      }
+
+      return `
+        <p><strong>당신의 수면 유형:</strong> ${type}</p>
+        <p><strong>수면시간:</strong> ${data.sleepDuration}</p>
+        <p><strong>수면자세:</strong> ${data.sleepPosture}</p>
+        <p><strong>베개종류:</strong> ${data.pillowType}</p>
+        <p><strong>공간 분리 여부:</strong> ${data.separateSpace}</p>
+        <p><strong>침구 상태:</strong> ${data.beddingCondition}</p>
+        <p><strong>전자기기 사용시간:</strong> ${data.deviceUsage}</p>
+      `;
+    }
+
+    container.innerHTML = getSleepType(data);
+  </script>
+</body>
+</html>
