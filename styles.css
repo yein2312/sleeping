@@ -19,3 +19,6 @@ button:hover {
     display: none; /* 프린트할 때 버튼은 안 보이게 */
   }
 }
+body {
+  background-color: #fffbcc;
+}
