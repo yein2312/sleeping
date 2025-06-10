@@ -46,20 +46,19 @@
   </form>
 
   <script>
-    document.getElementById('surveyForm').addEventListener('submit', function(e) {
-      e.preventDefault();
+  document.getElementById('surveyForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // 폼 제출 막고
 
-      // 폼 데이터 수집
-      const formData = new FormData(e.target);
-      const result = {};
-      formData.forEach((value, key) => {
-        result[key] = value;
-      });
-
-      // 데이터 저장 후 결과 페이지로 이동
-      localStorage.setItem('surveyResult', JSON.stringify(result));
-      window.location.href = 'result.html';
+    const formData = new FormData(e.target);
+    const result = {};
+    formData.forEach((value, key) => {
+      result[key] = value;
     });
-  </script>
+
+    // 결과 저장하고 result.html로 이동
+    localStorage.setItem('surveyResult', JSON.stringify(result));
+    window.location.href = 'result.html'; // 이 파일이 GitHub에 존재해야 함
+  });
+</script>
 </body>
 </html>
