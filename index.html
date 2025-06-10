@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>수면 실태 조사</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>수면 실태 조사</h1>
+    <form>
+        <label>1. 하루 평균 수면시간:</label><br>
+        <input type="radio" name="sleepDuration" value="2시간 미만"> 2시간 미만<br>
+        <input type="radio" name="sleepDuration" value="2~4시간"> 2시간 이상 4시간 미만<br>
+        <input type="radio" name="sleepDuration" value="4~6시간"> 4시간 이상 6시간 미만<br>
+        <input type="radio" name="sleepDuration" value="6~8시간"> 6시간 이상 8시간 미만<br>
+        <input type="radio" name="sleepDuration" value="8시간 이상"> 8시간 이상<br>
+
+        <label>2. 수면 자세:</label><br>
+        <input type="radio" name="sleepPosture" value="등을 대고 눕는 자세"> 등을 대고 눕는 자세<br>
+        <input type="radio" name="sleepPosture" value="옆으로 눕는 자세"> 옆으로 눕는 자세<br>
+        <input type="radio" name="sleepPosture" value="엎드려 자는 자세"> 엎드려 자는 자세<br>
+        <input type="radio" name="sleepPosture" value="동그랗게 말린 자세"> 동그랗게 말린 자세<br>
+
+        <label>3. 베개 종류:</label><br>
+        <input type="radio" name="pillowType" value="자루형"> 자루형<br>
+        <input type="radio" name="pillowType" value="도넛형"> 도넛형<br>
+        <input type="radio" name="pillowType" value="웨이브형"> 웨이브형<br>
+        <input type="radio" name="pillowType" value="복합형"> 복합형<br>
+        <input type="radio" name="pillowType" value="안김형"> 안김형<br>
+
+        <label>4. 수면 공간 분리 여부:</label><br>
+        <input type="radio" name="separateSpace" value="예"> 예<br>
+        <input type="radio" name="separateSpace" value="아니오"> 아니오<br>
+
+        <label>5. 침구 상태:</label><br>
+        <input type="radio" name="beddingCondition" value="예"> 예<br>
+        <input type="radio" name="beddingCondition" value="보통"> 보통<br>
+        <input type="radio" name="beddingCondition" value="아니오"> 아니오<br>
+
+        <label>6. 전자기기 사용시간:</label><br>
+        <input type="radio" name="deviceUsage" value="1시간 전"> 수면 1시간 이상 전<br>
+        <input type="radio" name="deviceUsage" value="30분 전"> 수면 30분 전<br>
+        <input type="radio" name="deviceUsage" value="직전"> 수면 직전<br>
+
+        <button type="submit">제출</button>
+    </form>
+</body>
+</html>
