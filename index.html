@@ -42,7 +42,24 @@
         <input type="radio" name="deviceUsage" value="30분 전"> 수면 30분 전<br>
         <input type="radio" name="deviceUsage" value="직전"> 수면 직전<br>
 
-        <button type="submit">제출</button>
-    </form>
+    <button type="submit">제출</button>
+  </form>
+
+  <script>
+    document.getElementById('surveyForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // 폼 데이터 수집
+      const formData = new FormData(e.target);
+      const result = {};
+      formData.forEach((value, key) => {
+        result[key] = value;
+      });
+
+      // 데이터 저장 후 결과 페이지로 이동
+      localStorage.setItem('surveyResult', JSON.stringify(result));
+      window.location.href = 'result.html';
+    });
+  </script>
 </body>
 </html>
