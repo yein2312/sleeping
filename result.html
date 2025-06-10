@@ -26,9 +26,11 @@
 
       if (hour.includes("6시간 이상") && device.includes("1시간")) {
         type = "건강한 수면형";
-      } else if (hour.includes("4시간") || device.includes("직전")) {
+      } 
+      else if (hour.includes("4시간") || device.includes("직전")) {
         type = "수면 부족형";
-      } else {
+      } 
+      else {
         type = "보통 수면형";
       }
 
