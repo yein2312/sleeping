@@ -45,9 +45,9 @@
     <button type="submit">제출</button>
   </form>
 
-  <script>
+ <script>
   document.getElementById('surveyForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // 폼 제출 막고
+    e.preventDefault(); // 기본 제출 막기
 
     const formData = new FormData(e.target);
     const result = {};
@@ -55,10 +55,13 @@
       result[key] = value;
     });
 
-    // 결과 저장하고 result.html로 이동
+    // 결과 저장
     localStorage.setItem('surveyResult', JSON.stringify(result));
-    window.location.href = 'result.html'; // 이 파일이 GitHub에 존재해야 함
+
+    // 👇 절대 경로로 이동
+    window.location.href = 'https://your-username.github.io/your-repo/result.html';
   });
 </script>
+
 </body>
 </html>
