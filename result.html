@@ -24,25 +24,31 @@
   let type = "";
   let tip = "";
 
-  // 조건문 콤보로 수면 유형 세분화!
-  if (sleepDuration.includes("8시간") && deviceUsage.includes("1시간")) {
-    type = "완벽한 수면형";
-    tip = "훌륭해요! 지금처럼 수면 루틴을 꾸준히 유지하세요. 💪";
-  } else if (sleepDuration.includes("6시간") && deviceUsage.includes("30분")) {
-    type = "준수한 수면형";
-    tip = "전자기기 사용을 조금만 줄이면 더 좋은 수면을 기대할 수 있어요. 🌙";
-  } else if (sleepDuration.includes("4~6시간") || beddingCondition === "보통") {
-    type = "회복 부족형";
-    tip = "침구나 수면 습관을 점검해보세요. 좋은 환경이 회복력을 높입니다. 🛏️";
-  } else if (deviceUsage.includes("직전") || beddingCondition === "아니오") {
-    type = "수면 방해형";
-    tip = "전자기기를 멀리하고, 침구 청결을 신경 써보세요. 📱❌";
-  } else if (sleepDuration.includes("2시간 미만")) {
-    type = "극심한 수면 부족형";
-    tip = "지금 당장 수면시간 확보가 필요해요! 건강이 우선입니다. 😨";
+  // 각 조건을 확인하여 수면 유형 분류
+  if ((sleepDuration.includes("6") || sleepDuration.includes("8")) && beddingCondition === "예" && deviceUsage.includes("1시간")) {
+    type = "건강한 루틴형";
+    tip = "지금처럼 꾸준한 루틴을 유지하세요! 훌륭합니다. 🌟";
+  } else if (sleepDuration.includes("6") && (sleepPosture.includes("엎드려") || sleepPosture.includes("동그랗게"))) {
+    type = "자세 주의형";
+    tip = "엎드리거나 몸을 말고 자면 척추에 무리가 갈 수 있어요. 자세를 점검해보세요. 🧘‍♂️";
+  } else if (separateSpace === "아니오") {
+    type = "수면 방해 가능형";
+    tip = "수면 공간이 분리되지 않으면 수면의 질이 낮아질 수 있어요. 가능하면 분리해보세요. 🚪";
+  } else if (sleepDuration.includes("4~6시간") && beddingCondition === "예") {
+    type = "수면 회복형";
+    tip = "좋은 환경이지만 수면시간이 부족해요. 조금만 더 자도 회복력이 확 늘어납니다! 😴";
+  } else if (deviceUsage === "직전") {
+    type = "스마트폰 중독형";
+    tip = "전자기기 사용은 최소 30분 전엔 멈추는 게 좋아요. 뇌가 쉴 시간이 필요해요! 📵";
+  } else if (sleepDuration.includes("2시간") || sleepDuration.includes("2~4")) {
+    type = "심각한 수면 부족형";
+    tip = "이건 정말 위험해요. 지금 당장 수면 시간을 늘려야 해요. 건강이 우선! 🚨";
+  } else if (beddingCondition === "아니오") {
+    type = "수면 환경 악화형";
+    tip = "침구가 불편하면 아무리 자도 피곤해요. 청결과 교체 주기를 확인하세요. 🛏️";
   } else {
     type = "보통 수면형";
-    tip = "현재 패턴을 유지하며 조절하면 좋아질 수 있어요. 😊";
+    tip = "크게 나쁜 점은 없지만, 약간씩 조정해보면 더 좋아질 수 있어요! 😊";
   }
 
   return `
@@ -55,8 +61,10 @@
     <p><strong>공간 분리 여부:</strong> ${separateSpace}</p>
     <p><strong>침구 상태:</strong> ${beddingCondition}</p>
     <p><strong>전자기기 사용시간:</strong> ${deviceUsage}</p>
+    <button onclick="window.location.href='index.html'">처음으로 돌아가기</button>
   `;
 }
+
 
     container.innerHTML = getSleepType(data);
     <button onclick="window.location.href='index.html'">처음으로 돌아가기</button>
