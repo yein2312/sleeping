@@ -17,6 +17,7 @@
     const container = document.getElementById('resultContainer');
 
     function getSleepType(data) {
+  function getSleepType(data) {
   if (!data) return "설문 데이터가 없습니다.";
 
   const { sleepDuration, deviceUsage, sleepPosture, pillowType, separateSpace, beddingCondition } = data;
@@ -50,7 +51,8 @@
     type = "보통 수면형";
     tip = "크게 나쁜 점은 없지만, 약간씩 조정해보면 더 좋아질 수 있어요! 😊";
   }
-}
+
+  // ✅ 여기 안에 return이 있어야 해!
   return `
     <p><strong>당신의 수면 유형:</strong> ${type}</p>
     <p><strong>맞춤 수면 팁:</strong> ${tip}</p>
@@ -66,8 +68,7 @@
 }
 
 
-    container.innerHTML = getSleepType(data);
-    <button onclick="window.location.href='index.html'">처음으로 돌아가기</button>
+    container.innerHTML = getSleepType(data)
   </script>
 </body>
 </html>
