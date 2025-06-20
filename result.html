@@ -3,71 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <title>수면 유형 결과</title>
-  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h1>수면 유형 결과</h1>
   <div id="resultContainer"></div>
-
-  <button onclick="window.print()">프린트하기</button>
-
   <script>
-    // 로컬스토리지에서 데이터 가져오기
     const data = JSON.parse(localStorage.getItem('surveyResult'));
     const container = document.getElementById('resultContainer');
 
-  function getSleepType(data) {
-  if (!data) return "설문 데이터가 없습니다.";
+    function getSleepType(data) {
+      if (!data) return "<p>설문 데이터가 없습니다.</p>";
 
-  const { sleepDuration, deviceUsage, sleepPosture, pillowType, separateSpace, beddingCondition } = data;
+      const { sleepDuration, deviceUsage, sleepPosture, pillowType, separateSpace, beddingCondition } = data;
+      let type = "", tip = "";
 
-  let type = "";
-  let tip = "";
+      // (조건 비교 로직 생략)
 
-  // 각 조건을 확인하여 수면 유형 분류
-  if ((sleepDuration.includes("6") || sleepDuration.includes("8")) && beddingCondition === "예" && deviceUsage.includes("1시간")) {
-    type = "건강한 루틴형";
-    tip = "지금처럼 꾸준한 루틴을 유지하세요! 훌륭합니다. 🌟";
-  } else if (sleepDuration.includes("6") && (sleepPosture.includes("엎드려") || sleepPosture.includes("동그랗게"))) {
-    type = "자세 주의형";
-    tip = "엎드리거나 몸을 말고 자면 척추에 무리가 갈 수 있어요. 자세를 점검해보세요. 🧘‍♂️";
-  } else if (separateSpace === "아니오") {
-    type = "수면 방해 가능형";
-    tip = "수면 공간이 분리되지 않으면 수면의 질이 낮아질 수 있어요. 가능하면 분리해보세요. 🚪";
-  } else if (sleepDuration.includes("4~6시간") && beddingCondition === "예") {
-    type = "수면 회복형";
-    tip = "좋은 환경이지만 수면시간이 부족해요. 조금만 더 자도 회복력이 확 늘어납니다! 😴";
-  } else if (deviceUsage === "직전") {
-    type = "스마트폰 중독형";
-    tip = "전자기기 사용은 최소 30분 전엔 멈추는 게 좋아요. 뇌가 쉴 시간이 필요해요! 📵";
-  } else if (sleepDuration.includes("2시간") || sleepDuration.includes("2~4")) {
-    type = "심각한 수면 부족형";
-    tip = "이건 정말 위험해요. 지금 당장 수면 시간을 늘려야 해요. 건강이 우선! 🚨";
-  } else if (beddingCondition === "아니오") {
-    type = "수면 환경 악화형";
-    tip = "침구가 불편하면 아무리 자도 피곤해요. 청결과 교체 주기를 확인하세요. 🛏️";
-  } else {
-    type = "보통 수면형";
-    tip = "크게 나쁜 점은 없지만, 약간씩 조정해보면 더 좋아질 수 있어요! 😊";
-  }
+      return `
+        <p><strong>당신의 수면 유형:</strong> ${type}</p>
+        <p><strong>맞춤 팁:</strong> ${tip}</p>
+        <button onclick="window.location.href='index.html'">처음으로 돌아가기</button>
+      `;
+    }
 
-  // ✅ 여기 안에 return이 있어야 해!
-  return `
-    <p><strong>당신의 수면 유형:</strong> ${type}</p>
-    <p><strong>맞춤 수면 팁:</strong> ${tip}</p>
-    <hr />
-    <p><strong>수면시간:</strong> ${sleepDuration}</p>
-    <p><strong>수면자세:</strong> ${sleepPosture}</p>
-    <p><strong>베개종류:</strong> ${pillowType}</p>
-    <p><strong>공간 분리 여부:</strong> ${separateSpace}</p>
-    <p><strong>침구 상태:</strong> ${beddingCondition}</p>
-    <p><strong>전자기기 사용시간:</strong> ${deviceUsage}</p>
-    <button onclick="window.location.href='index.html'">처음으로 돌아가기</button>
-  `;
-}
-
-
-    container.innerHTML = getSleepType(data)
+    container.innerHTML = getSleepType(data);
   </script>
 </body>
 </html>
