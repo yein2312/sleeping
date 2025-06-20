@@ -1,32 +1,147 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>수면 유형 결과</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background: #f0f8ff; color: #333; }
+    h1 { color: #2a6ebb; }
+    ul { list-style: inside disc; }
+    li { margin: 8px 0; }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #2a6ebb;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #1e4f8b;
+    }
+    hr {
+      margin: 20px 0;
+      border: 0;
+      border-top: 1px solid #ccc;
+    }
+  </style>
 </head>
 <body>
   <h1>수면 유형 결과</h1>
   <div id="resultContainer"></div>
-  <script>
-    const data = JSON.parse(localStorage.getItem('surveyResult'));
-    const container = document.getElementById('resultContainer');
 
-    function getSleepType(data) {
+  <script>
+    // 로컬스토리지에서 설문 데이터 가져오기
+    const data = JSON.parse(localStorage.getItem('surveyResult'));
+
+    function analyzeSleep(data) {
       if (!data) return "<p>설문 데이터가 없습니다.</p>";
 
-      const { sleepDuration, deviceUsage, sleepPosture, pillowType, separateSpace, beddingCondition } = data;
-      let type = "", tip = "";
+      const {
+        sleepDuration = "",
+        deviceUsage = "",
+        sleepPosture = "",
+        pillowType = "",
+        separateSpace = "",
+        beddingCondition = ""
+      } = data;
 
-      // (조건 비교 로직 생략)
+      let score = 0;
+      const feedback = [];
 
+      // 수면시간 점수 및 피드백
+      if (sleepDuration.includes("8시간 이상")) {
+        score += 10;
+        feedback.push("🛌 수면 시간이 충분해요. 아주 좋아요!");
+      } else if (sleepDuration.includes("6~8시간")) {
+        score += 7;
+        feedback.push("⏰ 수면 시간이 조금 부족할 수 있어요. 7~8시간을 목표로 해보세요.");
+      } else if (sleepDuration.includes("4~6시간")) {
+        score += 4;
+        feedback.push("😴 수면 시간이 부족해요. 건강을 위해 시간을 늘리세요.");
+      } else {
+        score += 1;
+        feedback.push("🚨 수면 시간이 매우 부족합니다! 당장 개선이 필요해요!");
+      }
+
+      // 전자기기 사용 시간 점수 및 피드백
+      if (deviceUsage === "사용 안함") {
+        score += 5;
+        feedback.push("📵 전자기기 사용을 잘 조절하고 있네요. 뇌가 편안해요!");
+      } else if (deviceUsage === "1시간 전") {
+        score += 3;
+        feedback.push("🌙 전자기기 사용 시간이 조금 늦어요. 잠들기 30분 전엔 멈추는 게 좋아요.");
+      } else {
+        score += 0;
+        feedback.push("⚠️ 스마트폰 직전까지 사용하면 숙면에 방해됩니다. 사용 시간을 줄이세요!");
+      }
+
+      // 수면 자세 점수 및 피드백
+      if (sleepPosture.includes("옆으로")) {
+        score += 5;
+        feedback.push("👍 옆으로 자는 자세는 척추 건강에 좋아요.");
+      } else if (sleepPosture.includes("등")) {
+        score += 4;
+        feedback.push("😊 등을 대고 자는 자세는 괜찮지만, 때때로 자세를 바꿔주세요.");
+      } else {
+        score += 2;
+        feedback.push("🧘 엎드리거나 몸을 말고 자면 척추에 부담이 될 수 있어요. 자세를 조심하세요.");
+      }
+
+      // 베개 종류 점수 및 피드백
+      if (pillowType === "메모리폼") {
+        score += 5;
+        feedback.push("🛏️ 메모리폼 베개가 목과 어깨를 잘 받쳐줘요. 좋아요!");
+      } else if (pillowType === "일반") {
+        score += 3;
+        feedback.push("💤 베개가 평범해요. 목 건강을 위해 더 좋은 베개를 고려해보세요.");
+      } else {
+        score += 1;
+        feedback.push("⚠️ 베개 상태가 좋지 않을 수 있어요. 교체를 고민해보세요.");
+      }
+
+      // 공간 분리 점수 및 피드백
+      if (separateSpace === "예") {
+        score += 5;
+        feedback.push("🚪 수면 공간이 잘 분리되어 집중하기 좋아요.");
+      } else {
+        score += 1;
+        feedback.push("🔕 수면 공간이 분리되지 않아 방해가 될 수 있어요. 분리 시도해보세요.");
+      }
+
+      // 침구 상태 점수 및 피드백
+      if (beddingCondition === "예") {
+        score += 5;
+        feedback.push("🌟 침구 상태가 깨끗하고 편안해요. 아주 좋아요!");
+      } else {
+        score += 1;
+        feedback.push("🛏️ 침구 상태가 좋지 않으면 숙면에 방해돼요. 청결을 유지하세요.");
+      }
+
+      // 총점 기준 유형 분류
+      let type = "";
+      if (score >= 30) type = "완벽한 수면 천사형";
+      else if (score >= 20) type = "건강한 수면 루틴형";
+      else if (score >= 10) type = "수면 관리 필요형";
+      else type = "위험 신호형";
+
+      // 결과 HTML 반환
       return `
         <p><strong>당신의 수면 유형:</strong> ${type}</p>
-        <p><strong>맞춤 팁:</strong> ${tip}</p>
+        <p><strong>총 점수:</strong> ${score}점</p>
+        <hr />
+        <h3>상세 피드백</h3>
+        <ul>
+          ${feedback.map(item => `<li>${item}</li>`).join('')}
+        </ul>
         <button onclick="window.location.href='index.html'">처음으로 돌아가기</button>
       `;
     }
 
-    container.innerHTML = getSleepType(data);
+    const container = document.getElementById('resultContainer');
+    container.innerHTML = analyzeSleep(data);
   </script>
 </body>
 </html>
