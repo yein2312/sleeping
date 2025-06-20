@@ -81,7 +81,8 @@ button:hover {
     color: black !important;
     font-size: 14pt !important;
   }
-  button {
+  /* 모든 버튼 숨기기 대신, 특정 클래스만 숨김 */
+  button:not(.print-button) {
     display: none !important;
   }
   #resultContainer {
@@ -89,3 +90,4 @@ button:hover {
     padding: 0 !important;
   }
 }
+
