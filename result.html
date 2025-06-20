@@ -144,6 +144,13 @@
     }
 
     const container = document.getElementById('resultContainer');
+    
+    if (!data) {
+      container.innerHTML = "<p>설문 결과가 없습니다. 먼저 설문을 완료해주세요!</p>";
+    } 
+    else {
+      container.innerHTML = analyzeSleep(data);
+    }
     container.innerHTML = analyzeSleep(data);
   </script>
 </body>
