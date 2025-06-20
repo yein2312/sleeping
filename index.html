@@ -98,17 +98,36 @@
 
   <script>
     document.getElementById('surveyForm').addEventListener('submit', function(e) {
-      e.preventDefault(); // 제출 막기
+  e.preventDefault(); // 제출 막기
 
-      const formData = new FormData(e.target);
-      const result = {};
-      formData.forEach((value, key) => {
-        result[key] = value;
-      });
+  const formData = new FormData(e.target);
+  const result = {};
+  let allFilled = true; // 전부 채워졌는지 체크 변수
 
-      localStorage.setItem('surveyResult', JSON.stringify(result));
-      window.location.href = 'result.html'; // 결과 페이지로 이동 (경로 맞게 수정)
-    });
+  formData.forEach((value, key) => {
+    result[key] = value;
+  });
+
+  // 여기서 필수 항목 키 배열 정의 (설문 문항 이름과 맞춰서!)
+  const requiredFields = ['sleepDuration', 'deviceUsage', 'sleepPosture', 'pillowType', 'separateSpace', 'beddingCondition'];
+
+  // 하나라도 빠졌으면 allFilled = false
+  for (const field of requiredFields) {
+    if (!result[field]) {
+      allFilled = false;
+      break;
+    }
+  }
+
+  if (!allFilled) {
+    alert('모든 항목을 선택해 주세요!'); // 귀여운 경고창~
+    return; // 저장 안 하고 멈춤
+  }
+
+  localStorage.setItem('surveyResult', JSON.stringify(result));
+  window.location.href = 'result.html'; // 결과 페이지로 이동 (경로 맞게 수정)
+});
+
   </script>
 </body>
 </html>
